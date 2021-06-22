@@ -7,21 +7,20 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^36.0.0",
-    "expo-file-system": "~8.0.0",
-    "expo-image-manipulator": "~8.0.0",
-    "expo-image-picker": "~8.0.1",
-    "expo-permissions": "~8.0.0",
+    "expo": "^41.0.0",
+    "expo-file-system": "~11.0.2",
+    "expo-image-manipulator": "~9.1.0",
+    "expo-image-picker": "~10.1.4",
     "prop-types": "^15.6.2",
-    "react": "16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.1.tar.gz",
+    "react": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
     "react-native-animatable": "^1.3.0",
-    "react-native-auto-height-image": "^1.0.5",
-    "react-native-iphone-x-helper": "^1.2.1",
+    "react-native-auto-height-image": "^3.2.4",
+    "react-native-iphone-x-helper": "^1.3.1",
     "react-native-vector-icons": "^6.6.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^8.0.0"
+    "babel-preset-expo": "8.3.0"
   },
   "private": true
 }
