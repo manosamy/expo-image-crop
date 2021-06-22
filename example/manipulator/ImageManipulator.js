@@ -182,8 +182,8 @@ class ExpoImageManipulator extends Component {
         const renderedImageWidth = imageRatio < (originalHeight / width) ? width : originalHeight / imageRatio
         const renderedImageHeight = imageRatio < (originalHeight / width) ? width * imageRatio : originalHeight
 
-        const renderedImageY = (originalHeight - renderedImageHeight) / 2.0
-        const renderedImageX = (width - renderedImageWidth) / 2.0
+        const renderedImageY = 0; //(originalHeight - renderedImageHeight) / 2.0
+        const renderedImageX = 0; //(width - renderedImageWidth) / 2.0
 
         const renderImageObj = {
             left: renderedImageX,
@@ -199,6 +199,8 @@ class ExpoImageManipulator extends Component {
         }
 
         let intersectAreaObj = {}
+
+        console.log("renderedImage", renderImageObj, "cropOverlay", cropOverlayObj);
 
         const x = Math.max(renderImageObj.left, cropOverlayObj.left)
         const num1 = Math.min(renderImageObj.left + renderImageObj.width, cropOverlayObj.left + cropOverlayObj.width)
@@ -219,6 +221,7 @@ class ExpoImageManipulator extends Component {
                 height: 0,
             }
         }
+        console.log("num1", num1, "num2", num2, "x", x, "y", y, "interestedArea", intersectAreaObj);
         return intersectAreaObj
     }
 
@@ -311,15 +314,36 @@ class ExpoImageManipulator extends Component {
             originalHeight = Dimensions.get('window').height - 122
         }
 
-        const cropRatio = originalHeight / width
+        const screenRatio = originalHeight / width
+        const limitingSideForRender = screenRatio > imageRatio ? "width" : "height";
 
-        const cropWidth = imageRatio < cropRatio ? width : originalHeight / imageRatio
-        const cropHeight = imageRatio < cropRatio ? width * imageRatio : originalHeight
+        let displayHeight, displayWidth, cropHeight, cropWidth;
+
+        if(limitingSideForRender == "width") {
+            displayWidth = width;
+            displayHeight = width * imageRatio;
+        } else {
+            displayHeight = originalHeight;
+            displayWidth = originalHeight / imageRatio;
+        }
+
+        const cropRatio = ratio ? ratio.height / ratio.width : imageRatio
+
+        const cropHeightForMaxwidth = displayWidth * cropRatio;
+        const cropWidthForMaxHeight = displayHeight / cropRatio;
+        
+        if(cropHeightForMaxwidth <= displayHeight) {
+            cropWidth = displayWidth;
+            cropHeight = cropHeightForMaxwidth;
+        } else {
+            cropHeight = displayHeight;
+            cropWidth = cropWidthForMaxHeight;
+        }
 
         const cropInitialTop = (originalHeight - cropHeight) / 2.0
         const cropInitialLeft = (width - cropWidth) / 2.0
 
-
+        console.log("image stats", {actualSize: this.actualSize, width, imageRatio, cropRatio, originalHeight, cropWidth, cropHeight, cropInitialLeft, cropInitialTop})
         if (this.currentSize.width === 0 && cropMode) {
             this.currentSize.width = cropWidth
             this.currentSize.height = cropHeight

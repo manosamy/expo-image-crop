@@ -99,10 +99,11 @@ export default class App extends React.Component {
                             // console.log(data)
                             this.setState({ uri: data.uri })
                         }}
-                        // fixedMask={{ width: 200, height: 200 }}
+                        ratio={{height: 3, width: 4}}
+                        // fixedMask={{ width: 200, height: 150 }}
                         onToggleModal={this.onToggleModal}
                         saveOptions={{
-                            compress: 1,
+                            compress: 0.6,
                             format: 'png',
                             base64: true,
                         }}

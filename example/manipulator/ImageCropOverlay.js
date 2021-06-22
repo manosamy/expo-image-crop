@@ -68,6 +68,7 @@ class ImageCropOverlay extends React.Component {
             style.height = this.props.minHeight
         }
         const { borderColor } = this.props
+        console.log("initial", {initialTop, initialLeft, initialHeight, initialWidth, offsetTop, offsetLeft, ratio}, "style", style);
         return (
             <View {...this.panResponder.panHandlers}
                 style={[{
